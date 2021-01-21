@@ -9,8 +9,35 @@
 	</form-beans>
 
 	<action-mappings>
-		<action path="/HelloWorld" type="com.ultraamps.web.actions.HelloWorldAction" name="helloWorldForm" scope="session">
-			<forward name="success" path="/HelloWorld.jsp"/>
+
+		<action path="/Welcome" 
+				<!-- this will only forward to another page -->
+				type="org.apache.struts.actions.ForwardAction" 
+				parameter="login.jsp">
+			<forward name="success" path="/login.jsp"/>
 		</action>
+
+		<action path="/*OrderAction" 
+				type="actions.OrderAction" 
+				name="helloWorldForm" 
+				scope="session">
+			<forward name="success" path="/orderEdit.jsp"/>
+		</action>
+
+		<action path="/*OrderAction" 
+				type="actions.OrderAction" 
+				name="helloWorldForm" 
+				scope="session">
+			<forward name="success" path="/orderEdit.jsp"/>
+		</action>
+
+		<action path="/*OrderAction" 
+				type="actions.OrderAction" 
+				name="helloWorldForm" 
+				scope="session">
+			<forward name="success" path="/orderEdit.jsp"/>
+		</action>
+
 	</action-mappings>
+
 </struts-config>

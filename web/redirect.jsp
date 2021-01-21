@@ -5,3 +5,8 @@
 <%@ taglib uri="/WEB-INF/struts-form.tld" prefix="form" %>
 <%@ taglib uri="/WEB-INF/struts-nested.tld" prefix="nested" %>
 
+<html:html>
+	<body>
+	        <h1>You've been redirected</h1>
+	</body>
+</html:html>
