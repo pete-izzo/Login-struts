@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" 
+"http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<form-beans>
+		<form-bean name="helloWorldForm" type="com.ultraamps.web.formbeans.HelloWorldForm"/>
+	</form-beans>
+
+	<action-mappings>
+		<action path="/HelloWorld" type="com.ultraamps.web.actions.HelloWorldAction" name="helloWorldForm" scope="session">
+			<forward name="success" path="/HelloWorld.jsp"/>
+		</action>
+	</action-mappings>
+</struts-config>
