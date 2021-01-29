@@ -23,7 +23,7 @@
 
   <!-- Define the CLASSPATH -->
   <path id="compile.classpath">
-    <fileset dir="${tcserver.home}/bin">
+    <fileset dir="web/WEB-INF/lib">
       <include name="*.jar"/>
     </fileset>
     <pathelement location="${tcserver.home}/lib"/>

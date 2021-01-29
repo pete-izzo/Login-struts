@@ -18,18 +18,24 @@
   
     <body bgcolor=white>
   
-    <form action="LoginServlet" method="POST">
+    <html:form action="Login.do">
 
         <h3>Please enter your credentials then click login:</h3>
+        UserName:<form:text property="un"/><br>
         <input type="text" required placeholder="Your Username" name="username" id="username">
         <br> 
+        enter password:<form:password property="password"/><br>
         <input type="password" required placeholder="Your Password" name="password" id="password">
         
-        <input type="submit" value="Submit"> 
+        <form:submit value="Login"/>
 
-    <!--PLACE MESSAGE HERE IF LOGIN INFO IS INCORRECT-->
-    </form>
-        <h3 style="color:red"><em><c:out value="${invalid}"/></em></h3>
+    </html:form>
+        <!--PLACE MESSAGE HERE IF LOGIN INFO IS INCORRECT-->
+
+        <div style="color:red">
+            <html:errors />
+        </div>
+        <h3 style="color:red"><em><c:out value="${notInvalid}"/></em></h3>
         <h3 style="color:red"><em><c:out value="${errorMessage}"/></em></h3>
 
     </body>
