@@ -5,17 +5,15 @@
 
 <struts-config>
 	<form-beans>
-		<form-bean name="LoginForm" type="formbeans.LoginForm"/>
+		<form-bean name="LoginForm" type="mine.formbeans.LoginForm"/>
 	</form-beans>
 
 	<action-mappings>
-		<action path="/Welcome" type="org.apache.struts.actions.ForwardAction" parameter="redirect.jsp">
-			<forward name="success" path="/redirect.jsp"/>
-		</action>
 
 		<action path="/Login"
- 				type="src.actions.LoginAction"
- 				name="LoginForm">
+ 				type="mine.actions.LoginAction"
+ 				name="LoginForm"
+				scope="session">
 			<forward name="success" path="/success.html"/>
 			<forward name="failure" path="/failure.html"/>
 		</action>

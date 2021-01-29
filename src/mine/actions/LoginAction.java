@@ -33,7 +33,11 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import formbeans.LoginForm;
+import org.apache.struts.action.*;
+import javax.servlet.http.*;
+import java.io.*;
+
+import mine.formbeans.LoginForm;
 
 
 public class LoginAction extends Action{
