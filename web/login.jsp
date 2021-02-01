@@ -22,12 +22,12 @@
 
         <h3>Please enter your credentials then click login:</h3>
         UserName:<form:text property="username"/><br>
-        <input type="text" required placeholder="Your Username" name="username" id="username">
+        
         <br> 
         enter password:<form:password property="password"/><br>
-        <input type="password" required placeholder="Your Password" name="password" id="password">
         
-        <form:submit value="Login"/>
+        
+        <html:submit value="Login"/>
 
     </html:form>
         <!--PLACE MESSAGE HERE IF LOGIN INFO IS INCORRECT-->
