@@ -21,7 +21,7 @@
     <html:form action="Login.do">
 
         <h3>Please enter your credentials then click login:</h3>
-        UserName:<form:text property="un"/><br>
+        UserName:<form:text property="username"/><br>
         <input type="text" required placeholder="Your Username" name="username" id="username">
         <br> 
         enter password:<form:password property="password"/><br>
