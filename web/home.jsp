@@ -20,7 +20,7 @@
     </head>
 
     <%
-    String uname = (String) session.getAttribute("name");
+    String uname = (String) session.getAttribute("un");
     String isLogged = (String) session.getAttribute("logged");
 
     if (null == uname || isLogged == "false") {

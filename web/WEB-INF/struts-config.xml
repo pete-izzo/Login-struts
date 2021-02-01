@@ -14,7 +14,7 @@
  				type="mine.actions.LoginAction"
  				name="LoginForm"
 				scope="session">
-			<forward name="success" path="/success.html"/>
+			<forward name="success" path="/home.jsp"/>
 			<forward name="failure" path="/failure.html"/>
 		</action>
 	</action-mappings>

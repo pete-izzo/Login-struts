@@ -54,6 +54,9 @@ public class LoginAction extends Action{
         String isLoggedIn = "false";
         HttpSession session = request.getSession();
 
+        session.setAttribute("un", un);
+
+
 
         // JDBC Stuff
         String dbURL ="java:comp/env/jdbc/NewDBTest";
