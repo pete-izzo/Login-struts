@@ -38,6 +38,8 @@ import javax.servlet.http.*;
 import java.io.*;
 
 import mine.formbeans.LoginForm;
+import mine.formbeans.CustomerInfo;
+import mine.formbeans.OrderInfo;
 
 
 public class LoginAction extends Action{
@@ -55,8 +57,15 @@ public class LoginAction extends Action{
         HttpSession session = request.getSession();
 
         session.setAttribute("un", un);
+        session.setAttribute("name", un);
 
 
+        //list of customers for dropdown
+        // List<CustomerInfo> customerList = lf.getCustomerList();
+
+        ArrayList<CustomerInfo> customerList = new ArrayList<CustomerInfo>();
+        //order info
+        ArrayList<OrderInfo> newOrders = new ArrayList<OrderInfo>();
 
         // JDBC Stuff
         String dbURL ="java:comp/env/jdbc/NewDBTest";
@@ -65,6 +74,7 @@ public class LoginAction extends Action{
 
         Context ctx = null;
         Connection con = null;
+        Connection connection = null;
         Statement stmt = null;
         ResultSet rs = null;
 
@@ -74,6 +84,7 @@ public class LoginAction extends Action{
             DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/firstDB");
 
             con = ds.getConnection();
+            connection = ds.getConnection();
 
             stmt = con.createStatement();
 
@@ -100,7 +111,7 @@ public class LoginAction extends Action{
                 String notValid = "Please enter a valid username or password";
                 session.setAttribute("notValid", notValid);
 
-                return mapping.findForward("failure");
+                return mapping.findForward("login.jsp");
                 // response.sendRedirect ("login.jsp");
 
             }

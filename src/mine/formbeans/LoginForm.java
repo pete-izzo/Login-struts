@@ -21,5 +21,7 @@ public class LoginForm extends ActionForm {
     public void setPassword(String password) {
         this.password = password;
     };
+
+    
    }
 

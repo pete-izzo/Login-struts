@@ -1,6 +1,6 @@
 //Java Customer Info class file
 
-package formbeans;
+package mine.formbeans;
 
 import java.io.IOException;
 import java.io.PrintWriter;

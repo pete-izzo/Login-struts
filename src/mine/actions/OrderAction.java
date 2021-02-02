@@ -32,6 +32,7 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.actions.DispatchAction;
 
 import org.apache.struts.action.*;
 import javax.servlet.http.*;
@@ -40,7 +41,7 @@ import java.io.*;
 import mine.formbeans.LoginForm;
 
 
-public class UserAction extends DispatchAction {
+public class OrderAction extends DispatchAction {
 
     private final static String SUCCESS = "success";
 
@@ -48,8 +49,9 @@ public class UserAction extends DispatchAction {
     public ActionForward add(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        UserForm userForm = (UserForm) form;
-        userForm.setMessage("Inside add user method.");
+        LoginForm loginForm = (LoginForm) form;
+        // loginForm.setMessage("Inside add user method.");
+        //add orders and send back to home
         return mapping.findForward(SUCCESS);
     }
 
@@ -57,8 +59,9 @@ public class UserAction extends DispatchAction {
     public ActionForward update(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        UserForm userForm = (UserForm) form;
-        userForm.setMessage("Inside update user method.");
+        LoginForm loginForm = (LoginForm) form;
+        // loginForm.setMessage("Inside update user method.");
+        //do updating and send back to home
         return mapping.findForward(SUCCESS);
     }
 
@@ -66,8 +69,19 @@ public class UserAction extends DispatchAction {
     public ActionForward delete(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        UserForm userForm = (UserForm) form;
-        userForm.setMessage("Inside delete user method.");
+        LoginForm loginForm = (LoginForm) form;
+        // loginForm.setMessage("Inside delete user method.");
+        //deleting orders and send back to home
+        return mapping.findForward(SUCCESS);
+    }
+
+    //may not need this
+    public ActionForward showAll(ActionMapping mapping, ActionForm form,
+            HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+        LoginForm loginForm = (LoginForm) form;
+        // loginForm.setMessage("Inside delete user method.");
+        //probably just send back to home
         return mapping.findForward(SUCCESS);
     }
 }
