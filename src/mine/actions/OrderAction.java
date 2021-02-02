@@ -84,6 +84,8 @@ public class OrderAction extends DispatchAction {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         LoginForm loginForm = (LoginForm) form;
+
+
         // loginForm.setMessage("Inside delete user method.");
         //probably just send back to home
         request.setAttribute("message", "Showing all orders successfully");

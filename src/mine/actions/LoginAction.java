@@ -54,10 +54,14 @@ public class LoginAction extends Action{
         String pw = lf.getPassword();
 
         String isLoggedIn = "false";
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
 
         session.setAttribute("un", un);
         session.setAttribute("name", un);
+
+        // Dropdown choice
+        String choice =  request.getParameter("dropDown");
+
 
 
         //list of customers for dropdown
@@ -76,8 +80,14 @@ public class LoginAction extends Action{
         Connection con = null;
         Connection connection = null;
         Statement stmt = null;
+        Statement statement =null;
         ResultSet rs = null;
+        ResultSet resultset = null;
+        ResultSet loginSet = null;
+        String sql;
+        String customerQuery;
 
+        System.out.println("-----START ALL-----");
 
         try {
             ctx = new InitialContext();
@@ -85,8 +95,104 @@ public class LoginAction extends Action{
 
             con = ds.getConnection();
             connection = ds.getConnection();
+            newOrders.clear();
+            System.out.println("-----NEW ORDERS CLEARED-----");
+
 
             stmt = con.createStatement();
+            statement=con.createStatement();
+
+            customerQuery = "SELECT * FROM customers";
+
+            resultset = statement.executeQuery(customerQuery);
+            System.out.println(resultset);
+
+
+            while(resultset.next()) {
+
+                /**
+                 * create customer list for drop down
+                 */
+
+                CustomerInfo customers = new CustomerInfo();
+
+                customers.setCustomerName(resultset.getString("cust_name"));
+                customers.setCustomerID(resultset.getInt("cust_id"));
+
+                customerList.add(customers);
+
+            }
+
+
+            if (choice == null || choice.equals("all")) {
+
+                /**
+                 * The Query
+                 * connects both tables at cust_id so customers names 
+                 * aren't duplicated for each order
+                 */
+
+                sql = "SELECT o.*, c.cust_name" +
+                " FROM orders o, customers c" +
+                " WHERE o.cust_id = c.cust_id";
+
+                rs = stmt.executeQuery(sql);
+
+            } else {
+
+                sql = "SELECT o.*, c.cust_name" +
+                " FROM orders o, customers c" +
+                " WHERE o.cust_id = c.cust_id" +
+                " AND c.cust_id = ?";
+                PreparedStatement ps = con.prepareStatement(sql);
+                ps.setString(1, choice);
+                rs = ps.executeQuery();
+
+            }
+            while(rs.next()) {
+    
+                OrderInfo orders = new OrderInfo();
+
+                orders.setOrderID(rs.getInt("order_id"));
+
+                orders.setCustomerName(rs.getString("cust_name"));
+                
+                orders.setOrderDate(rs.getDate("order_date"));
+
+                orders.setDescription(rs.getString("order_desc"));              
+
+                newOrders.add(orders);
+
+                System.out.println("newOrders contains: " + orders.getOrderID() + 
+                                    " " + orders.getCustomerName() +
+                                    " " + orders.getOrderDate() +
+                                    " " + orders.getDescription());
+
+            }
+
+            
+
+            /**
+             * Sorts all order array lists by date ascending
+             */
+            Collections.sort(newOrders, new Comparator<OrderInfo>() {
+                @Override
+                public int compare(OrderInfo o1, OrderInfo o2) {
+                    return o1.getOrderDate().compareTo(o2.getOrderDate());
+                }
+            });
+
+            session.setAttribute("cooldata", newOrders);
+            session.setAttribute("customerList", customerList);
+            System.out.println("-----COOLDATA-----");
+            System.out.println(newOrders);
+            System.out.println("-----customerList-----");
+            System.out.println(customerList);
+
+
+
+
+
 
             String query = "select * from users where userid = ? and passwd_digest = ?";
 
@@ -94,7 +200,7 @@ public class LoginAction extends Action{
             preparedStatement.setString(1, un);
             preparedStatement.setString(2, pw);
 
-            rs = preparedStatement.executeQuery();
+            loginSet = preparedStatement.executeQuery();
 
             String productInfo = con.getMetaData().getDatabaseProductName();
 
@@ -102,7 +208,7 @@ public class LoginAction extends Action{
     
             
 
-            if (rs.next()) {
+            if (loginSet.next()) {
                 isLoggedIn = "true";
                 return mapping.findForward("success");
                 // response.sendRedirect ("/login/HomeServlet");
@@ -125,6 +231,8 @@ public class LoginAction extends Action{
         } finally {
             try {
                 rs.close();
+                loginSet.close();
+                resultset.close();
                 stmt.close();
                 con.close();
                 ctx.close();
