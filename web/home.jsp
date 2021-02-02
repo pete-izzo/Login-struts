@@ -15,7 +15,7 @@
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 
 
-<html>
+<html:html>
   <style type="text/css">
     table, th, td {
       border: 1px solid black;
@@ -42,7 +42,7 @@
   
         <h2>Brought to you by: <c:out value="${DBProductInfo}" /></h2>
 
-        <form action="HomeServlet" method="POST">
+        <html:form action="Login.do">
 
           <select name="dropDown">
 
@@ -52,9 +52,9 @@
             </c:forEach>
           </select>
 
-          <input type="submit" value="Submit" />
+          <html:submit value="Submit" />
 
-        </form>
+        </html:form>
         
         
 
@@ -129,5 +129,5 @@
 
 
 
-</html>
+</html:html>
   
