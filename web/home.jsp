@@ -4,6 +4,13 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 
+<%@ taglib uri="./WEB-INF/struts-bean.tld" prefix="bean" %>
+<%@ taglib uri="./WEB-INF/struts-html.tld" prefix="html" %>
+<%@ taglib uri="./WEB-INF/struts-logic.tld" prefix="logic" %>
+<%@ taglib uri="./WEB-INF/struts-form.tld" prefix="form" %>
+<%@ taglib uri="./WEB-INF/struts-nested.tld" prefix="nested" %>
+
+
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 
@@ -100,13 +107,23 @@
                 </c:forEach>                
 
             </tbody>
-        </table>  
+        </table> 
+        
+        <html:link href="Orders.do?parameter=add">Create Order</html:link>
+        | 
+        <html:link href="Orders.do?parameter=delete">Delete Orders</html:link>
+        | 
+        <html:link href="Orders.do?parameter=update">Update Orders</html:link>
+        | 
+        <html:link href="Orders.do?parameter=showAll">Show all orders</html:link>
 
         
         <br>
         <br>          
         <a href="OrderServlet"><button>Submit New Order</button></a>
         <br>
+
+        <h2><c:out value="${message}" /></h2>
   
       </body>
 

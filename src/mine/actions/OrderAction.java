@@ -52,6 +52,8 @@ public class OrderAction extends DispatchAction {
         LoginForm loginForm = (LoginForm) form;
         // loginForm.setMessage("Inside add user method.");
         //add orders and send back to home
+
+        request.setAttribute("message", "Order added successfully");
         return mapping.findForward(SUCCESS);
     }
 
@@ -62,6 +64,7 @@ public class OrderAction extends DispatchAction {
         LoginForm loginForm = (LoginForm) form;
         // loginForm.setMessage("Inside update user method.");
         //do updating and send back to home
+        request.setAttribute("message", "ORder edited successfully");
         return mapping.findForward(SUCCESS);
     }
 
@@ -72,6 +75,7 @@ public class OrderAction extends DispatchAction {
         LoginForm loginForm = (LoginForm) form;
         // loginForm.setMessage("Inside delete user method.");
         //deleting orders and send back to home
+        request.setAttribute("message", "Order deleted successfully");
         return mapping.findForward(SUCCESS);
     }
 
@@ -82,6 +86,7 @@ public class OrderAction extends DispatchAction {
         LoginForm loginForm = (LoginForm) form;
         // loginForm.setMessage("Inside delete user method.");
         //probably just send back to home
+        request.setAttribute("message", "Showing all orders successfully");
         return mapping.findForward(SUCCESS);
     }
 }

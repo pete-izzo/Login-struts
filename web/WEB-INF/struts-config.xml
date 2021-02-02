@@ -17,6 +17,15 @@
 			<forward name="success" path="/home.jsp"/>
 			<forward name="failure" path="/failure.html"/>
 		</action>
+
+		<action path="/Orders"
+ 				type="mine.actions.OrderAction"
+				parameter="parameter"
+ 				name="LoginForm"
+				scope="session">
+			<forward name="success" path="/home.jsp"/>
+			<forward name="failure" path="/failure.html"/>
+		</action>
 	</action-mappings>
 
 	
