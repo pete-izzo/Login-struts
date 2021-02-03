@@ -32,9 +32,11 @@
       <body bgcolor=white>
     
         <h1>Welcome <c:out value="${name}" /></h1>
+        <h2>del:<c:out value="${del}"/> orderID: <c:out value="${orderIDString}"/></h2>
+        <h2></h2>
 
         <!--orderID set in home.jsp saved in servlet from doGet and passed to this page-->
-        <c:if test="${sessionScope.orderID != null && sessionScope.del != '1'}">
+        <c:if test="${sessionScope.orderIDInt != null && sessionScope.del != '1'}">
           <h1>Choose a new date and type a new description to edit the order below</h1>
 
           <table>
@@ -75,7 +77,7 @@
         <!--END EDIT ORDER SECTION-->
 
         <!--DELETE SECTION-->
-        <c:if test="${sessionScope.del == '1'}">
+        <c:if test="${sessionScope.del.equals('1')}">
 
           <h1>Are you sure you would like to delete:</h1>
           <table>
@@ -103,7 +105,7 @@
             <input type="submit" value="Yes"/>
 
           </form>
-          <a href="HomeServlet">Back Home</a>
+          <a href="Login.do">Back Home</a>
 
 
 
@@ -114,7 +116,7 @@
 
 
         <!--ADD ORDER SECTION-->
-        <c:if test="${sessionScope.del == null && sessionScope.orderID == null}">
+        <c:if test="${sessionScope.del == null && sessionScope.orderIDInt == null}">
           <h2>Add an order for...</h2>
 
           <form action="OrderServlet" method="post">
@@ -134,7 +136,7 @@
               <br> 
   
               <input type="submit" value="Submit" />
-              <a href="HomeServlet">Back Home</a>
+              <a href="Login.do">Back Home</a>
 
           </form>
   

@@ -44,12 +44,15 @@ import mine.formbeans.LoginForm;
 public class OrderAction extends DispatchAction {
 
     private final static String SUCCESS = "success";
+    private final static String ORDERS = "orders";
 
     //add order
     public ActionForward add(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         LoginForm loginForm = (LoginForm) form;
+        HttpSession session = request.getSession(false);
+
         // loginForm.setMessage("Inside add user method.");
         //add orders and send back to home
 
@@ -62,6 +65,8 @@ public class OrderAction extends DispatchAction {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         LoginForm loginForm = (LoginForm) form;
+        HttpSession session = request.getSession(false);
+
         // loginForm.setMessage("Inside update user method.");
         //do updating and send back to home
         request.setAttribute("message", "ORder edited successfully");
@@ -73,6 +78,8 @@ public class OrderAction extends DispatchAction {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         LoginForm loginForm = (LoginForm) form;
+        HttpSession session = request.getSession(false);
+
         // loginForm.setMessage("Inside delete user method.");
         //deleting orders and send back to home
         request.setAttribute("message", "Order deleted successfully");
@@ -80,15 +87,36 @@ public class OrderAction extends DispatchAction {
     }
 
     //may not need this
-    public ActionForward showAll(ActionMapping mapping, ActionForm form,
+    public ActionForward orderEdit(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         LoginForm loginForm = (LoginForm) form;
+        HttpSession session = request.getSession(false);
+
+
+        String del = request.getParameter("delOrderID");
+        request.setAttribute("del", del);
+
+        String orderIDString = request.getParameter("orderID");
+        if(orderIDString != null) {
+
+            int orderIDInt = Integer.parseInt(orderIDString);
+            request.setAttribute("orderIDInt", orderIDInt);
+
+        }
+        request.setAttribute("orderIDString", orderIDString);
+
+
+        System.out.println("del = " + del);
+        System.out.println("orderIDString = " + orderIDString);
+        
+
 
 
         // loginForm.setMessage("Inside delete user method.");
         //probably just send back to home
         request.setAttribute("message", "Showing all orders successfully");
-        return mapping.findForward(SUCCESS);
+
+        return mapping.findForward(ORDERS);
     }
 }
