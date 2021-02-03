@@ -39,6 +39,8 @@ import javax.servlet.http.*;
 import java.io.*;
 
 import mine.formbeans.LoginForm;
+import mine.formbeans.CustomerInfo;
+import mine.formbeans.OrderInfo;
 
 
 public class OrderAction extends DispatchAction {
@@ -94,22 +96,52 @@ public class OrderAction extends DispatchAction {
         HttpSession session = request.getSession(false);
 
 
-        String del = request.getParameter("delOrderID");
-        request.setAttribute("del", del);
-
         String orderIDString = request.getParameter("orderID");
+
+        String del = request.getParameter("delOrderID");
+        session.setAttribute("del", del);
         if(orderIDString != null) {
 
             int orderIDInt = Integer.parseInt(orderIDString);
-            request.setAttribute("orderIDInt", orderIDInt);
+
+            //Gets newOrders ArrayList from session to iterate over to get the specific order
+            //for whichever edit is clicked
+            ArrayList<OrderInfo> newOrders = (ArrayList)session.getAttribute("cooldata");
+
+            //Grabs only the "orders" obj inside "newOrders" that has a matching id as the
+            //one of the clicked edit button
+            for(OrderInfo orders : newOrders){
+
+                if(orders.getOrderID() == orderIDInt) {
+                    System.out.println("newOrders contains: " + orders.getOrderID() + 
+                                        " " + orders.getCustomerName() +
+                                        " " + orders.getOrderDate() +
+                                        " " + orders.getDescription());
+
+                        /*
+                        * \\\\\\\\\\\\\\\\\\\
+                        *   save this order to session so you can mess with it
+                        *   or at least save its values to session to display them
+                        *   in the event that more attributes are saved than displayed on the
+                        *   home screen
+                        * \\\\\\\\\\\\\\\\\\\\
+                        */
+
+                        session.setAttribute("orders", orders);
+
+                }
+
+
+            };
 
         }
-        request.setAttribute("orderIDString", orderIDString);
+
+        session.setAttribute("orderIDString", orderIDString);
 
 
         System.out.println("del = " + del);
         System.out.println("orderIDString = " + orderIDString);
-        
+
 
 
 
