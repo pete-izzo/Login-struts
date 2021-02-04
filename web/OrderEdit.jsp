@@ -4,6 +4,13 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 
+<%@ taglib uri="./WEB-INF/struts-bean.tld" prefix="bean" %>
+<%@ taglib uri="./WEB-INF/struts-html.tld" prefix="html" %>
+<%@ taglib uri="./WEB-INF/struts-logic.tld" prefix="logic" %>
+<%@ taglib uri="./WEB-INF/struts-form.tld" prefix="form" %>
+<%@ taglib uri="./WEB-INF/struts-nested.tld" prefix="nested" %>
+
+
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 
@@ -99,12 +106,12 @@
           </table>  
 
           <br>
-          <form action="OrderServlet" method="POST">
+          <html:form action="Orders.do?parameter=delete">
             <td><input type="hidden" name="delete" value="delete"></td>
 
-            <input type="submit" value="Yes"/>
+            <html:submit value="Yes"/>
 
-          </form>
+          </html:form>
           <a href="Login.do">Back Home</a>
 
 
