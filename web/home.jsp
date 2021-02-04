@@ -94,7 +94,7 @@
 
                         <!--DELETE ITEMS-->
                         <td>
-                          <html:link action="Orders.do?parameter=orderEdit&orderID=${item.orderID}&delOrderID='1'">
+                          <html:link action="Orders.do?parameter=orderEdit&orderID=${item.orderID}&delOrderID='foo'">
 
                           Delete
                         </html:link>

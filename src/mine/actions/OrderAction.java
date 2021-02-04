@@ -97,20 +97,40 @@ public class OrderAction extends DispatchAction {
 
 
         String orderIDString = request.getParameter("orderID");
+        System.out.println("OrderIDString = " + orderIDString);
+
 
         String del = request.getParameter("delOrderID");
         session.setAttribute("del", del);
+        System.out.println("-----BEFORE IF STMT-----");
+
         if(orderIDString != null) {
 
             int orderIDInt = Integer.parseInt(orderIDString);
+            System.out.println("-----ORDERidiNT SET-----");
+
 
             //Gets newOrders ArrayList from session to iterate over to get the specific order
             //for whichever edit is clicked
             ArrayList<OrderInfo> newOrders = (ArrayList)session.getAttribute("cooldata");
+            System.out.println(newOrders);
+
 
             //Grabs only the "orders" obj inside "newOrders" that has a matching id as the
             //one of the clicked edit button
             for(OrderInfo orders : newOrders){
+                System.out.println("-----FOR STMT WORK?-----");
+                orders.setDel(" ");
+                System.out.println("-----GET DEL-----");
+
+                System.out.println("Del = " + orders.getDel());
+
+
+                System.out.println("orders contains: " + orders.getOrderID() + 
+                                        " " + orders.getCustomerName() +
+                                        " " + orders.getOrderDate() +
+                                        " " + orders.getDescription());
+
 
                 if(orders.getOrderID() == orderIDInt) {
                     System.out.println("newOrders contains: " + orders.getOrderID() + 
@@ -127,19 +147,29 @@ public class OrderAction extends DispatchAction {
                         * \\\\\\\\\\\\\\\\\\\\
                         */
 
+                        System.out.println("-----SET DEL-----");
+
+                        orders.setDel("foo");
+                        System.out.println("Del = " + orders.getDel());
+
+
                         session.setAttribute("orders", orders);
 
                 }
 
 
             };
+            session.setAttribute("orderIDInt", orderIDInt);
+            System.out.println("orderIDInt = " + orderIDInt);
+
+
 
         }
 
         session.setAttribute("orderIDString", orderIDString);
 
 
-        System.out.println("del = " + del);
+        // System.out.println("del = " + del);
         System.out.println("orderIDString = " + orderIDString);
 
 

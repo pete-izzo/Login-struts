@@ -17,12 +17,13 @@ import java.io.*;
 import java.util.*;
 import java.nio.charset.StandardCharsets;
 
-public class OrderInfo{
+public class OrderInfo implements Serializable{
     private int orderID;
     private int customerID;
     private String customerName = null;
     private Date orderDate = null;
     private String description = null;
+    private String del = null;
 
     public OrderInfo(){
     }
@@ -47,6 +48,10 @@ public class OrderInfo{
         return description;
     }
 
+    public String getDel(){
+        return del;
+    }
+
     public void setOrderID(int orderID) {
         this.orderID = orderID;
     }
@@ -65,6 +70,10 @@ public class OrderInfo{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setDel(String del){
+        this.del = del;
     }
 
     // @Override
