@@ -23,7 +23,7 @@
 				parameter="parameter"
  				name="LoginForm"
 				scope="session">
-			<forward name="success" path="/home.jsp"/>
+			<forward name="success" path="/Login.do"/>
 			<forward name="failure" path="/failure.html"/>
 			<forward name="orders" path="/OrderEdit.jsp"/>
 		</action>

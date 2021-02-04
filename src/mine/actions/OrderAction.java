@@ -47,8 +47,18 @@ public class OrderAction extends DispatchAction {
 
     private final static String SUCCESS = "success";
     private final static String ORDERS = "orders";
+    private final static String dbURL ="java:comp/env/jdbc/firstDB";
 
-    //add order
+    private final static String driver = "org.apache.derby.jdbc.EmbeddedDriver";
+
+
+
+
+    /**
+     * /////////////////////
+     * ORDER ADD ACTION
+     * /////////////////////
+     */
     public ActionForward add(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -62,7 +72,11 @@ public class OrderAction extends DispatchAction {
         return mapping.findForward(SUCCESS);
     }
 
-    //edit orders
+    /**
+     * /////////////////////
+     * ORDER EDIT ACTION
+     * /////////////////////
+     */
     public ActionForward update(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -75,12 +89,65 @@ public class OrderAction extends DispatchAction {
         return mapping.findForward(SUCCESS);
     }
 
-    //delete order
+    /**
+     * /////////////////////
+     * ORDER DELETE ACTION
+     * /////////////////////
+     */
     public ActionForward delete(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         LoginForm loginForm = (LoginForm) form;
         HttpSession session = request.getSession(false);
+
+        int orderIDInt = (int)session.getAttribute("orderIDInt");
+        System.out.println("Delete Action OrderIDInt = " + orderIDInt);
+        Context ctx = null;
+        Connection con = null;
+        Statement stmt = null;
+        String addOrder = null;
+
+
+        try {
+
+        
+            ctx = new InitialContext();
+            DataSource ds = (DataSource) ctx.lookup(dbURL);
+        
+            con = ds.getConnection();
+        
+            stmt = con.createStatement();
+        
+
+            String deleteOrder = "DELETE FROM orders" +
+                                 " WHERE order_id = ?";
+            PreparedStatement delOrder = con.prepareStatement(deleteOrder);
+
+            delOrder.setInt(1, orderIDInt);
+            delOrder.executeUpdate();
+            delOrder.close();
+            System.out.println("---ORDER DELETED---");
+
+
+        } catch (NamingException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+                ctx.close();
+
+            }catch (SQLException error) {
+                error.printStackTrace();
+            }catch (NamingException error) {
+                error.printStackTrace();
+            }
+        }
+
+
+
 
         // loginForm.setMessage("Inside delete user method.");
         //deleting orders and send back to home
@@ -88,7 +155,7 @@ public class OrderAction extends DispatchAction {
         return mapping.findForward(SUCCESS);
     }
 
-    //may not need this
+    //mapping and variable setting for orderEdit.jsp page
     public ActionForward orderEdit(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
