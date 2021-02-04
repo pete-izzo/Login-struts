@@ -160,10 +160,10 @@ public class LoginAction extends Action{
                 orders.setOrderDate(rs.getDate("order_date"));
 
                 orders.setDescription(rs.getString("order_desc")); 
-                System.out.println("----SET DEL----");
+                // System.out.println("----SET DEL----");
  
-                orders.setDel(" ");  
-                System.out.println("Del = " + orders.getDel());
+                // orders.setDel(" ");  
+                // System.out.println("Del = " + orders.getDel());
           
 
                 newOrders.add(orders);

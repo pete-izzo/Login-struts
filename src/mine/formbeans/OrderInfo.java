@@ -23,7 +23,7 @@ public class OrderInfo implements Serializable{
     private String customerName = null;
     private Date orderDate = null;
     private String description = null;
-    private String del = null;
+    // private String del = null;
 
     public OrderInfo(){
     }
@@ -48,9 +48,9 @@ public class OrderInfo implements Serializable{
         return description;
     }
 
-    public String getDel(){
-        return del;
-    }
+    // public String getDel(){
+    //     return del;
+    // }
 
     public void setOrderID(int orderID) {
         this.orderID = orderID;
@@ -72,9 +72,9 @@ public class OrderInfo implements Serializable{
         this.description = description;
     }
 
-    public void setDel(String del){
-        this.del = del;
-    }
+    // public void setDel(String del){
+    //     this.del = del;
+    // }
 
     // @Override
     // public int compare(OrderInfo o1, OrderInfo o2) {

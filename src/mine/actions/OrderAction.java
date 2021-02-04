@@ -192,10 +192,10 @@ public class OrderAction extends DispatchAction {
             //one of the clicked edit button
             for(OrderInfo orders : newOrders){
                 System.out.println("-----FOR STMT WORK?-----");
-                orders.setDel(" ");
-                System.out.println("-----GET DEL-----");
+                // orders.setDel(" ");
+                // System.out.println("-----GET DEL-----");
 
-                System.out.println("Del = " + orders.getDel());
+                // System.out.println("Del = " + orders.getDel());
 
 
                 System.out.println("orders contains: " + orders.getOrderID() + 
@@ -219,10 +219,10 @@ public class OrderAction extends DispatchAction {
                         * \\\\\\\\\\\\\\\\\\\\
                         */
 
-                        System.out.println("-----SET DEL-----");
+                        // System.out.println("-----SET DEL-----");
 
-                        orders.setDel("foo");
-                        System.out.println("Del = " + orders.getDel());
+                        // orders.setDel("foo");
+                        // System.out.println("Del = " + orders.getDel());
 
 
                         session.setAttribute("orders", orders);

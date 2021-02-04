@@ -43,7 +43,7 @@
         <h2>addOrder: <c:out value="${addOrder}"/> </h2>
 
         <!--orderID set in home.jsp saved in servlet from doGet and passed to this page-->
-        <c:if test="${sessionScope.orderIDInt != null && orders.getDel() != 'foo'}">
+        <c:if test="${sessionScope.orderIDInt != null && sessionScope.del != 'foo'}">
           <h1>Choose a new date and type a new description to edit the order below</h1>
 
           <table>
