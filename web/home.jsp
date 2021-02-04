@@ -94,7 +94,7 @@
 
                         <!--DELETE ITEMS-->
                         <td>
-                          <html:link action="Orders.do?parameter=orderEdit&orderID=${item.orderID}&delOrderID='foo'">
+                          <html:link action="Orders.do?parameter=orderEdit&orderID=${item.orderID}&delOrderID=foo">
 
                           Delete
                         </html:link>
@@ -118,7 +118,9 @@
         
         <br>
         <br>          
-        <a href="OrderServlet"><button>Submit New Order</button></a>
+        <html:link action="Orders.do?parameter=orderEdit&addNew=1">
+          <button>Submit New Order</button>
+        </html:link>
         <br>
 
         <h2><c:out value="${message}" /></h2>

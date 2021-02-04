@@ -162,7 +162,7 @@ public class LoginAction extends Action{
                 orders.setDescription(rs.getString("order_desc")); 
                 System.out.println("----SET DEL----");
  
-                orders.setDel("");  
+                orders.setDel(" ");  
                 System.out.println("Del = " + orders.getDel());
           
 

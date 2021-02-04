@@ -40,7 +40,7 @@
     
         <h1>Welcome <c:out value="${name}" /></h1>
         <h2>del:<c:out value="${del}"/> orderID: <c:out value="${orderIDInt}"/></h2>
-        <h2></h2>
+        <h2>addOrder: <c:out value="${addOrder}"/> </h2>
 
         <!--orderID set in home.jsp saved in servlet from doGet and passed to this page-->
         <c:if test="${sessionScope.orderIDInt != null && orders.getDel() != 'foo'}">
@@ -84,7 +84,7 @@
         <!--END EDIT ORDER SECTION-->
 
         <!--DELETE SECTION-->
-        <c:if test="${orders.getDel() == 'foo'}">
+        <c:if test="${sessionScope.del == 'foo'}">
 
           <h1>Are you sure you would like to delete:</h1>
           <table>
@@ -123,10 +123,10 @@
 
 
         <!--ADD ORDER SECTION-->
-        <c:if test="${sessionScope.del == null && sessionScope.orderIDInt == null}">
+        <c:if test="${addOrder=='1'}">
           <h2>Add an order for...</h2>
 
-          <form action="OrderServlet" method="post">
+          <html:form action="Orders.do?parameter=add">
               <select name="customerChoice">
                   <c:forEach items="${customerList}" var="items">
                       <option value="${items.customerID}">${items.customerName} ${items.customerID}</option>
@@ -145,7 +145,7 @@
               <input type="submit" value="Submit" />
               <a href="Login.do">Back Home</a>
 
-          </form>
+          </html:form>
   
         </c:if>
         <!--END ADD ORDER-->

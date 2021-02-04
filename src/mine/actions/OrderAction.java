@@ -165,6 +165,11 @@ public class OrderAction extends DispatchAction {
 
         String orderIDString = request.getParameter("orderID");
         System.out.println("OrderIDString = " + orderIDString);
+        String addOrder = request.getParameter("addNew");
+        System.out.println("addOrder = " + addOrder);
+        session.setAttribute("addOrder", addOrder);
+
+
 
 
         String del = request.getParameter("delOrderID");
