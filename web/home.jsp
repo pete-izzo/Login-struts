@@ -86,10 +86,9 @@
 
                         <!--EDIT ITEMS-->
                         <td>
-                          <a href="<c:url value='OrderEdit.jsp'>
-                                <c:param name="orderID" value="${item.orderID}"/>
-                                </c:url>">Edit
-                          </a>
+                          <html:link action="Orders.do?parameter=orderEdit&orderID=${item.orderID}">
+                                Edit
+                          </html:link>
                         </td>
 
                         <!--DELETE ITEMS-->

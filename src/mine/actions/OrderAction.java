@@ -192,11 +192,6 @@ public class OrderAction extends DispatchAction {
             //one of the clicked edit button
             for(OrderInfo orders : newOrders){
                 System.out.println("-----FOR STMT WORK?-----");
-                // orders.setDel(" ");
-                // System.out.println("-----GET DEL-----");
-
-                // System.out.println("Del = " + orders.getDel());
-
 
                 System.out.println("orders contains: " + orders.getOrderID() + 
                                         " " + orders.getCustomerName() +
@@ -218,13 +213,6 @@ public class OrderAction extends DispatchAction {
                         *   home screen
                         * \\\\\\\\\\\\\\\\\\\\
                         */
-
-                        // System.out.println("-----SET DEL-----");
-
-                        // orders.setDel("foo");
-                        // System.out.println("Del = " + orders.getDel());
-
-
                         session.setAttribute("orders", orders);
 
                 }
@@ -234,6 +222,14 @@ public class OrderAction extends DispatchAction {
             session.setAttribute("orderIDInt", orderIDInt);
             System.out.println("orderIDInt = " + orderIDInt);
 
+            System.out.println("----ALL EDIT VARIABLES----");
+
+            System.out.println("orderIDInt = " + orderIDInt +
+                               " orderIDString = " + orderIDString +
+                               " del = " + del +
+                               " addOrder = " + addOrder);
+    
+
 
 
         }
@@ -242,7 +238,7 @@ public class OrderAction extends DispatchAction {
 
 
         // System.out.println("del = " + del);
-        System.out.println("orderIDString = " + orderIDString);
+
 
 
 
