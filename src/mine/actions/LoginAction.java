@@ -38,6 +38,7 @@ import javax.servlet.http.*;
 import java.io.*;
 
 import mine.formbeans.LoginForm;
+import mine.formbeans.CustomerOrderForm;
 import mine.formbeans.CustomerInfo;
 import mine.formbeans.OrderInfo;
 
@@ -49,6 +50,7 @@ public class LoginAction extends Action{
         throws Exception {
         
         LoginForm lf = (LoginForm) form;
+        // CustomerOrderForm cof = (CustomerOrderForm) form;
 
         String un = lf.getUsername();
         String pw = lf.getPassword();
@@ -67,9 +69,19 @@ public class LoginAction extends Action{
         //list of customers for dropdown
         // List<CustomerInfo> customerList = lf.getCustomerList();
 
-        ArrayList<CustomerInfo> customerList = new ArrayList<CustomerInfo>();
+        ArrayList<CustomerInfo> customerList = lf.getCustomerList();
+        if(lf.getCustomerList() == null) {
+            customerList = new ArrayList<>();
+        }
+
+        // ArrayList<CustomerInfo> customerList = new ArrayList<CustomerInfo>();
         //order info
-        ArrayList<OrderInfo> newOrders = new ArrayList<OrderInfo>();
+        ArrayList<OrderInfo> newOrders = lf.getNewOrders();
+        if(lf.getNewOrders() == null) {
+            newOrders = new ArrayList<>();
+        }
+
+        // ArrayList<OrderInfo> newOrders = new ArrayList<OrderInfo>();
 
         // JDBC Stuff
         String dbURL ="java:comp/env/jdbc/NewDBTest";
@@ -96,7 +108,8 @@ public class LoginAction extends Action{
             con = ds.getConnection();
             connection = ds.getConnection();
             newOrders.clear();
-            System.out.println("-----NEW ORDERS CLEARED-----");
+            customerList.clear();
+            System.out.println("-----NEW ORDERS AND CUSTOMER LIST CLEARED-----");
 
 
             stmt = con.createStatement();
@@ -122,6 +135,9 @@ public class LoginAction extends Action{
                 customerList.add(customers);
 
             }
+            lf.setCustomerList(customerList);
+            System.out.println(lf.getCustomerList());
+
 
 
             if (choice == null || choice.equals("all")) {
@@ -186,6 +202,12 @@ public class LoginAction extends Action{
                     return o1.getOrderDate().compareTo(o2.getOrderDate());
                 }
             });
+            lf.setNewOrders(newOrders);
+            System.out.println("-----OrderInfoForm.setNewOrders()-----");
+            System.out.println(lf.getNewOrders());
+
+
+
 
             session.setAttribute("cooldata", newOrders);
             session.setAttribute("customerList", customerList);

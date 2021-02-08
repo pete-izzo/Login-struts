@@ -6,13 +6,13 @@ import java.util.*;
 public class OrderInfoForm extends ActionForm
 {
 
-	private List<OrderInfo> newOrders;
-	public List<OrderInfo> getNewOrders()
+	private ArrayList<OrderInfo> newOrders;
+	public ArrayList<OrderInfo> getNewOrders()
 	{
 		return newOrders;
 	}
 
-	public void setNewOrders(List<OrderInfo> newOrders)
+	public void setNewOrders(ArrayList<OrderInfo> newOrders)
 	{
 		this.newOrders = newOrders;
 	}

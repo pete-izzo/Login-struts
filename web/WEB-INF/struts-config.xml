@@ -6,6 +6,7 @@
 <struts-config>
 	<form-beans>
 		<form-bean name="LoginForm" type="mine.formbeans.LoginForm"/>
+		<form-bean name="CustomerOrderForm" type="mine.formbeans.CustomerOrderForm"/>
 	</form-beans>
 
 	<action-mappings>

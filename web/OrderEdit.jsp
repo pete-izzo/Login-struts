@@ -13,6 +13,8 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 
 
 <html>
@@ -23,6 +25,16 @@
   </style>
     <head>
       <title>Add an Order</title>  
+
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+      <link rel="stylesheet" href="/resources/demos/style.css">
+      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <script>
+      $( function() {
+        $( "#datepicker" ).datepicker();
+      } );
+      </script>
 
     </head>
 
@@ -136,7 +148,8 @@
               <br>
               <br>
               <label for="date">Order Date: </label><br>
-              <input type="date" required name="order_date" id="order_date">
+              <input type="text" id="datepicker" required name="order_date"></p>
+              <!-- <input type="date" required name="order_date" id="order_date"> -->
               <br>
               <label for="description">Order Description:</label><br>
               <input type="text" required placeholder="What was ordered?" name="orderDescription" id="orderDescription">

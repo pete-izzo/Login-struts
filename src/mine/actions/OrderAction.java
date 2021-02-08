@@ -25,7 +25,8 @@ import java.lang.Object;
 import java.util.Collections;
 import static java.util.Comparator.comparing;
 import java.io.*;
-import java.util.*;
+import java.util.Collections;
+import java.util.ArrayList;
 
 import org.apache.struts.action.*;
 import org.apache.struts.action.Action;
@@ -36,7 +37,6 @@ import org.apache.struts.actions.DispatchAction;
 
 import org.apache.struts.action.*;
 import javax.servlet.http.*;
-import java.io.*;
 
 import mine.formbeans.LoginForm;
 import mine.formbeans.CustomerInfo;
@@ -65,6 +65,21 @@ public class OrderAction extends DispatchAction {
         LoginForm loginForm = (LoginForm) form;
         HttpSession session = request.getSession(false);
 
+        String customer = request.getParameter("customerChoice");
+        session.setAttribute("customerChoice", customer);
+
+
+        String orderDate = request.getParameter("order_date");
+        Date date = java.sql.Date.valueOf(orderDate);
+
+        String description = request.getParameter("orderDescription");
+        
+        System.out.println("customer: " + customer);
+        System.out.println("Date: " + date);
+        System.out.println("Description: " + description);
+
+
+
         // loginForm.setMessage("Inside add user method.");
         //add orders and send back to home
 
@@ -85,7 +100,7 @@ public class OrderAction extends DispatchAction {
 
         // loginForm.setMessage("Inside update user method.");
         //do updating and send back to home
-        request.setAttribute("message", "ORder edited successfully");
+        request.setAttribute("message", "Order edited successfully");
         return mapping.findForward(SUCCESS);
     }
 
@@ -145,9 +160,6 @@ public class OrderAction extends DispatchAction {
                 error.printStackTrace();
             }
         }
-
-
-
 
         // loginForm.setMessage("Inside delete user method.");
         //deleting orders and send back to home
