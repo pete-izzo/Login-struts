@@ -21,10 +21,10 @@
     <html:form action="Login.do">
 
         <h3>Please enter your credentials then click login:</h3>
-        UserName:<form:text property="username"/><br>
+        UserName:<nested:text property="username"/><br>
         
         <br> 
-        enter password:<form:password property="password"/><br>
+        enter password:<nested:password property="password"/><br>
         
         
         <html:submit value="Login"/>

@@ -119,7 +119,7 @@
 
           <br>
           <html:form action="Orders.do?parameter=delete">
-            <td><input type="hidden" name="delete" value="delete"></td>
+            <!-- <td><html type="hidden" name="delete" value="delete"></td> -->
 
             <html:submit value="Yes"/>
 
@@ -147,16 +147,19 @@
   
               <br>
               <br>
-              <label for="date">Order Date: </label><br>
-              <input type="text" id="datepicker" required name="order_date"></p>
-              <!-- <input type="date" required name="order_date" id="order_date"> -->
-              <br>
-              <label for="description">Order Description:</label><br>
-              <input type="text" required placeholder="What was ordered?" name="orderDescription" id="orderDescription">
-              <br> 
+              <nested:iterate property="OrderInfo">
+                <label for="date">Order Date: </label><br>
+                <p id="datepicker"><nested:text  property="order.getOrderDate()" /></p>
+                <!-- <input type="date" required name="order_date" id="order_date"> -->
+                <br>
+                <label for="description">Order Description:</label><br>
+                <html:text property="setOrderDescription" />
+                <br> 
+              </nested:iterate>
+              
   
-              <input type="submit" value="Submit" />
-              <a href="Login.do">Back Home</a>
+              <html:submit value="Submit New Order" />
+              <html:link href="Login.do">Back Home</html:link>
 
           </html:form>
   

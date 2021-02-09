@@ -50,7 +50,6 @@ public class LoginAction extends Action{
         throws Exception {
         
         LoginForm lf = (LoginForm) form;
-        // CustomerOrderForm cof = (CustomerOrderForm) form;
 
         String un = lf.getUsername();
         String pw = lf.getPassword();
