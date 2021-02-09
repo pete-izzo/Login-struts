@@ -38,7 +38,7 @@ import org.apache.struts.actions.DispatchAction;
 import org.apache.struts.action.*;
 import javax.servlet.http.*;
 
-import mine.formbeans.LoginForm;
+import mine.formbeans.OrderEditForm;
 import mine.formbeans.CustomerInfo;
 import mine.formbeans.OrderInfo;
 
@@ -62,7 +62,7 @@ public class OrderAction extends DispatchAction {
     public ActionForward add(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        LoginForm loginForm = (LoginForm) form;
+        OrderEditForm oef = (OrderEditForm) form;
         HttpSession session = request.getSession(false);
 
         String customer = request.getParameter("customerChoice");
@@ -80,7 +80,7 @@ public class OrderAction extends DispatchAction {
 
 
 
-        // loginForm.setMessage("Inside add user method.");
+        // oef.setMessage("Inside add user method.");
         //add orders and send back to home
 
         request.setAttribute("message", "Order added successfully");
@@ -95,10 +95,10 @@ public class OrderAction extends DispatchAction {
     public ActionForward update(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        LoginForm loginForm = (LoginForm) form;
+        OrderEditForm oef = (OrderEditForm) form;
         HttpSession session = request.getSession(false);
 
-        // loginForm.setMessage("Inside update user method.");
+        // oef.setMessage("Inside update user method.");
         //do updating and send back to home
         request.setAttribute("message", "Order edited successfully");
         return mapping.findForward(SUCCESS);
@@ -112,7 +112,7 @@ public class OrderAction extends DispatchAction {
     public ActionForward delete(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        LoginForm loginForm = (LoginForm) form;
+        OrderEditForm oef = (OrderEditForm) form;
         HttpSession session = request.getSession(false);
 
         int orderIDInt = (int)session.getAttribute("orderIDInt");
@@ -161,7 +161,7 @@ public class OrderAction extends DispatchAction {
             }
         }
 
-        // loginForm.setMessage("Inside delete user method.");
+        // oef.setMessage("Inside delete user method.");
         //deleting orders and send back to home
         request.setAttribute("message", "Order deleted successfully");
         return mapping.findForward(SUCCESS);
@@ -171,7 +171,7 @@ public class OrderAction extends DispatchAction {
     public ActionForward orderEdit(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        LoginForm loginForm = (LoginForm) form;
+        OrderEditForm oef = (OrderEditForm) form;
         HttpSession session = request.getSession(false);
 
 
@@ -255,7 +255,7 @@ public class OrderAction extends DispatchAction {
 
 
 
-        // loginForm.setMessage("Inside delete user method.");
+        // oef.setMessage("Inside delete user method.");
         //probably just send back to home
         request.setAttribute("message", "Showing all orders successfully");
 

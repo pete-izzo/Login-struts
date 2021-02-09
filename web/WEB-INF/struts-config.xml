@@ -7,6 +7,7 @@
 	<form-beans>
 		<form-bean name="LoginForm" type="mine.formbeans.LoginForm"/>
 		<form-bean name="CustomerOrderForm" type="mine.formbeans.CustomerOrderForm"/>
+		<form-bean name="OrderEditForm" type="mine.formbeans.OrderEditForm"/>
 	</form-beans>
 
 	<action-mappings>
@@ -22,7 +23,7 @@
 		<action path="/Orders"
  				type="mine.actions.OrderAction"
 				parameter="parameter"
- 				name="LoginForm"
+ 				name="OrderEditForm"
 				scope="session">
 			<forward name="success" path="/Login.do"/>
 			<forward name="failure" path="/failure.html"/>

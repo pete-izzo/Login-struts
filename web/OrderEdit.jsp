@@ -147,15 +147,13 @@
   
               <br>
               <br>
-              <nested:iterate property="OrderInfo">
                 <label for="date">Order Date: </label><br>
-                <p id="datepicker"><nested:text  property="order.getOrderDate()" /></p>
+                <p ><html:text styleId="datepicker" property="orderDate" /></p>
                 <!-- <input type="date" required name="order_date" id="order_date"> -->
                 <br>
                 <label for="description">Order Description:</label><br>
-                <html:text property="setOrderDescription" />
+                <html:text property="description" />
                 <br> 
-              </nested:iterate>
               
   
               <html:submit value="Submit New Order" />
