@@ -4,12 +4,13 @@ import org.apache.struts.action.*;
 import org.apache.struts.action.ActionForm;
 import java.util.*;
 
+
 public class OrderEditForm extends ActionForm {
 
     private int orderID;
     private int customerID;
     private String customerName = null;
-    private Date orderDate = null;
+    private String orderDate = null;
     private String description = null;
 
     public int getOrderID() {
@@ -24,7 +25,7 @@ public class OrderEditForm extends ActionForm {
         return customerName;
     }
 
-    public Date getOrderDate() {
+    public String getOrderDate() {
         return orderDate;
     }
 
@@ -48,7 +49,7 @@ public class OrderEditForm extends ActionForm {
         this.customerName = customerName;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(String orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -65,6 +66,7 @@ public class OrderEditForm extends ActionForm {
 	public void setNewOrders(ArrayList<OrderInfo> newOrders)
 	{
 		this.newOrders = newOrders;
-	}
+    }
+
 
 }

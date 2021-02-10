@@ -148,11 +148,11 @@
               <br>
               <br>
                 <label for="date">Order Date: </label><br>
-                <p ><html:text styleId="datepicker" property="orderDate" /></p>
+                <nested:text styleId="datepicker" property="orderDate" />
                 <!-- <input type="date" required name="order_date" id="order_date"> -->
                 <br>
                 <label for="description">Order Description:</label><br>
-                <html:text property="description" />
+                <nested:text property="description" />
                 <br> 
               
   

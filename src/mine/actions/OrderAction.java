@@ -27,6 +27,9 @@ import static java.util.Comparator.comparing;
 import java.io.*;
 import java.util.Collections;
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
 
 import org.apache.struts.action.*;
 import org.apache.struts.action.Action;
@@ -51,9 +54,6 @@ public class OrderAction extends DispatchAction {
 
     private final static String driver = "org.apache.derby.jdbc.EmbeddedDriver";
 
-
-
-
     /**
      * /////////////////////
      * ORDER ADD ACTION
@@ -62,21 +62,27 @@ public class OrderAction extends DispatchAction {
     public ActionForward add(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
+                System.out.println("-----BEGIN ADD-----");
+
         OrderEditForm oef = (OrderEditForm) form;
         HttpSession session = request.getSession(false);
+        System.out.println("start add method");
+
 
         String customer = request.getParameter("customerChoice");
         session.setAttribute("customerChoice", customer);
 
+        //formats date from string so it can be put in db
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        java.util.Date date = sdf.parse(oef.getOrderDate());
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
-        String orderDate = request.getParameter("order_date");
-        Date date = java.sql.Date.valueOf(orderDate);
-
-        String description = request.getParameter("orderDescription");
         
         System.out.println("customer: " + customer);
-        System.out.println("Date: " + date);
-        System.out.println("Description: " + description);
+        System.out.println(oef.getOrderDate());
+        System.out.println(oef.getDescription());
+        System.out.println("SQL Date: " + sqlDate);
+
 
 
 
@@ -198,6 +204,7 @@ public class OrderAction extends DispatchAction {
             //for whichever edit is clicked
             ArrayList<OrderInfo> newOrders = (ArrayList)session.getAttribute("cooldata");
             System.out.println(newOrders);
+            
 
 
             //Grabs only the "orders" obj inside "newOrders" that has a matching id as the
@@ -247,6 +254,8 @@ public class OrderAction extends DispatchAction {
         }
 
         session.setAttribute("orderIDString", orderIDString);
+        System.out.println("------end of edit reached------");
+
 
 
         // System.out.println("del = " + del);
