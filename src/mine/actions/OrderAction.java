@@ -77,17 +77,70 @@ public class OrderAction extends DispatchAction {
         java.util.Date date = sdf.parse(oef.getOrderDate());
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
-        
         System.out.println("customer: " + customer);
-        System.out.println(oef.getOrderDate());
-        System.out.println(oef.getDescription());
         System.out.println("SQL Date: " + sqlDate);
 
+        Context ctx = null;
+        Connection con = null;
+        Statement stmt = null;
+        String addOrder = null;
+
+        try {
+
+            ctx = new InitialContext();
+            DataSource ds = (DataSource) ctx.lookup(dbURL);
+
+            con = ds.getConnection();
+
+            stmt = con.createStatement();
+
+            System.out.println("-----Inside New Order Function-------");
+
+            int custID = Integer.parseInt(customer);
+            System.out.println("custID: " + custID);
+
+
+                /**
+                 *  
+                 * //////////////////
+                 * PREPARED STATEMENT
+                 * to insert new orders into orders
+                 * table
+                 * //////////////////
+                 * 
+                 */
+                addOrder =  "INSERT INTO orders (cust_id, order_date, order_desc) VALUES (?, ?, ?)";
+                PreparedStatement insertOrder = con.prepareStatement(addOrder);
+                System.out.println("insertOrder: " + insertOrder);
+
+
+                insertOrder.setInt(1, custID);
+                insertOrder.setDate(2, sqlDate);
+                insertOrder.setString(3, oef.getDescription());
+
+                insertOrder.executeUpdate();
+                insertOrder.close();             
+
+                System.out.println("-------Add Order Prepared Statement Complete--------");
 
 
 
-        // oef.setMessage("Inside add user method.");
-        //add orders and send back to home
+        } catch (NamingException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+                ctx.close();
+
+            }catch (SQLException error) {
+                error.printStackTrace();
+            }catch (NamingException error) {
+                error.printStackTrace();
+            }
+        }
 
         request.setAttribute("message", "Order added successfully");
         return mapping.findForward(SUCCESS);
