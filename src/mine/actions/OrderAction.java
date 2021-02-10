@@ -66,8 +66,6 @@ public class OrderAction extends DispatchAction {
 
         OrderEditForm oef = (OrderEditForm) form;
         HttpSession session = request.getSession(false);
-        System.out.println("start add method");
-
 
         String customer = request.getParameter("customerChoice");
         session.setAttribute("customerChoice", customer);
@@ -99,31 +97,27 @@ public class OrderAction extends DispatchAction {
             int custID = Integer.parseInt(customer);
             System.out.println("custID: " + custID);
 
+            /**
+             *  
+             * //////////////////
+             * PREPARED STATEMENT
+             * to insert new orders into orders
+             * table
+             * //////////////////
+             * 
+             */
+            addOrder =  "INSERT INTO orders (cust_id, order_date, order_desc) VALUES (?, ?, ?)";
+            PreparedStatement insertOrder = con.prepareStatement(addOrder);
+            System.out.println("insertOrder: " + insertOrder);
 
-                /**
-                 *  
-                 * //////////////////
-                 * PREPARED STATEMENT
-                 * to insert new orders into orders
-                 * table
-                 * //////////////////
-                 * 
-                 */
-                addOrder =  "INSERT INTO orders (cust_id, order_date, order_desc) VALUES (?, ?, ?)";
-                PreparedStatement insertOrder = con.prepareStatement(addOrder);
-                System.out.println("insertOrder: " + insertOrder);
+            insertOrder.setInt(1, custID);
+            insertOrder.setDate(2, sqlDate);
+            insertOrder.setString(3, oef.getDescription());
 
+            insertOrder.executeUpdate();
+            insertOrder.close();             
 
-                insertOrder.setInt(1, custID);
-                insertOrder.setDate(2, sqlDate);
-                insertOrder.setString(3, oef.getDescription());
-
-                insertOrder.executeUpdate();
-                insertOrder.close();             
-
-                System.out.println("-------Add Order Prepared Statement Complete--------");
-
-
+            System.out.println("-------Add Order Prepared Statement Complete--------");
 
         } catch (NamingException ex) {
             ex.printStackTrace();
@@ -156,6 +150,15 @@ public class OrderAction extends DispatchAction {
             throws Exception {
         OrderEditForm oef = (OrderEditForm) form;
         HttpSession session = request.getSession(false);
+
+        System.out.println("-----BEGIN ORDER EDIT-----");
+
+        int orderIDInt = (int)session.getAttribute("orderIDInt");
+        System.out.println("Delete Action OrderIDInt = " + orderIDInt);
+        System.out.println("OrderDate: " + oef.getOrderDate());
+        System.out.println("Description: " + oef.getDescription());
+
+
 
         // oef.setMessage("Inside update user method.");
         //do updating and send back to home

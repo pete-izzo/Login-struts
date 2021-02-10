@@ -74,15 +74,15 @@
                 <th><c:out value="${orders.getDescription()}"/></th>
               </tr>
                   <tr>
-                      <form action="OrderServlet" method="POST">
+                      <html:form action="Orders.do?parameter=update">
 
                         <td></td>
                         <td></td>
-                        <td><input type="date" name="newOrderDate" id="orderDate" required></td>
-                        <td><input type="text" name="editOrderDescription" value="${item.description}"></td>
-                        <td><input type="submit" value="Save"/></td>
+                        <td><nested:text styleId="datepicker" property="orderDate" /></td>
+                        <td><nested:text property="description" /></td>
+                        <td><html:submit value="Save" /></td>
 
-                      </form>
+                      </html:form>
                       
                   </tr>
 
@@ -109,6 +109,14 @@
             <tbody>
 
               <tr>
+                <th>Order ID</th>
+                <th>Customer Name</th>
+                <th>Order Date</th>
+                <th>Description</th>
+              </tr>
+
+
+              <tr>
                 <th><c:out value="${orders.getOrderID()}"/></th>
                 <th><c:out value="${orders.getCustomerName()}"/></th>
                 <th><c:out value="${orders.getOrderDate()}"/></th>
@@ -124,7 +132,7 @@
             <html:submit value="Yes"/>
 
           </html:form>
-          <a href="Login.do">Back Home</a>
+          <html:link href="Login.do">Back Home</html:link>
 
 
 
