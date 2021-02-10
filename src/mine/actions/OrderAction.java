@@ -154,9 +154,64 @@ public class OrderAction extends DispatchAction {
         System.out.println("-----BEGIN ORDER EDIT-----");
 
         int orderIDInt = (int)session.getAttribute("orderIDInt");
-        System.out.println("Delete Action OrderIDInt = " + orderIDInt);
+        //formats date from string so it can be put in db
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        java.util.Date date = sdf.parse(oef.getOrderDate());
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        System.out.println("-----ORDER EDIT TEST VARIABLES-----");
+
         System.out.println("OrderDate: " + oef.getOrderDate());
+        System.out.println("SQL Date: " + sqlDate);
+        System.out.println("OrderIDInt = " + orderIDInt);
         System.out.println("Description: " + oef.getDescription());
+
+        Context ctx = null;
+        Connection con = null;
+        Statement stmt = null;
+        String addOrder = null;
+
+        try {
+
+            ctx = new InitialContext();
+            DataSource ds = (DataSource) ctx.lookup(dbURL);
+
+            con = ds.getConnection();
+
+            stmt = con.createStatement();
+
+            String updateOrder = "UPDATE orders" +
+            " SET order_date = ?" +
+            ", order_desc = ?" +
+            " WHERE order_id = ?";
+
+            PreparedStatement editOrder = con.prepareStatement(updateOrder);
+            editOrder.setDate(1, sqlDate);
+            editOrder.setString(2, oef.getDescription());
+            editOrder.setInt(3, orderIDInt);
+
+            editOrder.executeUpdate();
+            editOrder.close();
+
+            stmt = con.createStatement();
+            stmt.execute(updateOrder);
+
+        } catch (NamingException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+                ctx.close();
+
+            }catch (SQLException error) {
+                error.printStackTrace();
+            }catch (NamingException error) {
+                error.printStackTrace();
+            }
+        }
+
 
 
 

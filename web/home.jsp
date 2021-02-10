@@ -106,16 +106,6 @@
 
             </tbody>
         </table> 
-        
-        <html:link href="Orders.do?parameter=add">Create Order</html:link>
-        | 
-        <html:link href="Orders.do?parameter=delete">Delete Orders</html:link>
-        | 
-        <html:link href="Orders.do?parameter=update">Update Orders</html:link>
-        | 
-        <html:link href="Orders.do?parameter=showAll">Show all orders</html:link>
-
-        
         <br>
         <br>          
         <html:link action="Orders.do?parameter=orderEdit&addNew=1">

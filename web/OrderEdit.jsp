@@ -49,10 +49,6 @@
     %>
       
       <body bgcolor=white>
-    
-        <h1>Welcome <c:out value="${name}" /></h1>
-        <h2>del:<c:out value="${del}"/> orderID: <c:out value="${orderIDInt}"/></h2>
-        <h2>addOrder: <c:out value="${addOrder}"/> </h2>
 
         <!--orderID set in home.jsp saved in servlet from doGet and passed to this page-->
         <c:if test="${sessionScope.orderIDString != null && sessionScope.del != 'foo'}">
