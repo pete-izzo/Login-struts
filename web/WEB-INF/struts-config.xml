@@ -17,7 +17,7 @@
  				name="LoginForm"
 				scope="session">
 			<forward name="success" path="/home.jsp"/>
-			<forward name="failure" path="/failure.html"/>
+			<forward name="failure" path="/login.jsp"/>
 		</action>
 
 		<action path="/Orders"
@@ -31,14 +31,14 @@
 		</action>
 	</action-mappings>
 
-	<message-resources
+	<!-- <message-resources
 		parameter="user.properties.common" />
 
 	<plug-in className="org.apache.struts.validator.ValidatorPlugIn" >
 		<set-property property="pathnames"
 		value="/WEB-INF/validator-rules.xml, /WEB-INF/validator-user.xml"/>
         
-	</plug-in>
+	</plug-in> -->
 
 	
 

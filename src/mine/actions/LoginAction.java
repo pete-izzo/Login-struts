@@ -243,7 +243,7 @@ public class LoginAction extends Action{
                 String notValid = "Please enter a valid username or password";
                 session.setAttribute("notValid", notValid);
 
-                return mapping.findForward("login.jsp");
+                return mapping.findForward("failure");
                 // response.sendRedirect ("login.jsp");
 
             }

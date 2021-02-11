@@ -35,8 +35,8 @@
         <div style="color:red">
             <html:errors />
         </div>
-        <!-- <h3 style="color:red"><em><c:out value="${notInvalid}"/></em></h3>
-        <h3 style="color:red"><em><c:out value="${errorMessage}"/></em></h3> -->
+        <h3 style="color:red"><em><c:out value="${notValid}"/></em></h3>
+        <h3 style="color:red"><em><c:out value="${errorMessage}"/></em></h3>
 
     </body>
 </html:html>
