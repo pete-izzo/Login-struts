@@ -1,0 +1,17 @@
+<form-validation>
+
+    <formset>
+        <form name="Login">
+
+            <field property="usename" depends="required">
+                <msg name="required" key="err.user.username.required" />
+            </field>
+
+            <field property="password" depends="required">
+                <msg name="required" key="err.user.pwd.required" />
+            </field>
+
+        </form>
+    </formset>
+
+</form-validation>

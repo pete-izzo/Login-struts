@@ -31,6 +31,9 @@
 		</action>
 	</action-mappings>
 
+	<message-resources
+		parameter="user.properties.common" />
+
 	<plug-in className="org.apache.struts.validator.ValidatorPlugIn" >
 		<set-property property="pathnames"
 		value="/WEB-INF/validator-rules.xml, /WEB-INF/validator-user.xml"/>

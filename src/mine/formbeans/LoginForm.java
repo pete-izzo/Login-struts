@@ -1,11 +1,20 @@
 package mine.formbeans;
 
-import org.apache.struts.action.*;
-import org.apache.struts.action.ActionForm;
+// import org.apache.struts.action.*;
+// import org.apache.struts.action.ActionForm;
+
+/*
+* //////////////////
+* THIS WASNT WORKING NEEDS TO BE WORKED ON
+* //////////////////
+*/
+import org.apache.struts.validator.*;
+import org.apache.struts.validator.ValidatorForm;
+
 import java.util.*;
 
 
-public class LoginForm extends ActionForm {
+public class LoginForm extends ValidatorForm {
     protected String username;
     protected String password;
 
