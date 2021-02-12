@@ -38,7 +38,6 @@ import javax.servlet.http.*;
 import java.io.*;
 
 import mine.formbeans.LoginForm;
-import mine.formbeans.CustomerOrderForm;
 import mine.formbeans.CustomerInfo;
 import mine.formbeans.OrderInfo;
 
@@ -60,28 +59,6 @@ public class LoginAction extends Action{
         session.setAttribute("un", un);
         session.setAttribute("name", un);
 
-        // Dropdown choice
-        String choice =  request.getParameter("dropDown");
-
-
-
-        //list of customers for dropdown
-        // List<CustomerInfo> customerList = lf.getCustomerList();
-
-        ArrayList<CustomerInfo> customerList = lf.getCustomerList();
-        if(lf.getCustomerList() == null) {
-            customerList = new ArrayList<>();
-        }
-
-        // ArrayList<CustomerInfo> customerList = new ArrayList<CustomerInfo>();
-        //order info
-        ArrayList<OrderInfo> newOrders = lf.getNewOrders();
-        if(lf.getNewOrders() == null) {
-            newOrders = new ArrayList<>();
-        }
-
-        // ArrayList<OrderInfo> newOrders = new ArrayList<OrderInfo>();
-
         // JDBC Stuff
         String dbURL ="java:comp/env/jdbc/NewDBTest";
 
@@ -89,14 +66,8 @@ public class LoginAction extends Action{
 
         Context ctx = null;
         Connection con = null;
-        Connection connection = null;
-        Statement stmt = null;
-        Statement statement =null;
-        ResultSet rs = null;
-        ResultSet resultset = null;
         ResultSet loginSet = null;
         String sql;
-        String customerQuery;
 
         System.out.println("-----START ALL-----");
 
@@ -105,121 +76,6 @@ public class LoginAction extends Action{
             DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/firstDB");
 
             con = ds.getConnection();
-            connection = ds.getConnection();
-            newOrders.clear();
-            customerList.clear();
-            System.out.println("-----NEW ORDERS AND CUSTOMER LIST CLEARED-----");
-
-
-            stmt = con.createStatement();
-            statement=con.createStatement();
-
-            customerQuery = "SELECT * FROM customers";
-
-            resultset = statement.executeQuery(customerQuery);
-            System.out.println(resultset);
-
-
-            while(resultset.next()) {
-
-                /**
-                 * create customer list for drop down
-                 */
-
-                CustomerInfo customers = new CustomerInfo();
-
-                customers.setCustomerName(resultset.getString("cust_name"));
-                customers.setCustomerID(resultset.getInt("cust_id"));
-
-                customerList.add(customers);
-
-            }
-            lf.setCustomerList(customerList);
-            System.out.println(lf.getCustomerList());
-
-
-
-            if (choice == null || choice.equals("all")) {
-
-                /**
-                 * The Query
-                 * connects both tables at cust_id so customers names 
-                 * aren't duplicated for each order
-                 */
-
-                sql = "SELECT o.*, c.cust_name" +
-                " FROM orders o, customers c" +
-                " WHERE o.cust_id = c.cust_id";
-
-                rs = stmt.executeQuery(sql);
-
-            } else {
-
-                sql = "SELECT o.*, c.cust_name" +
-                " FROM orders o, customers c" +
-                " WHERE o.cust_id = c.cust_id" +
-                " AND c.cust_id = ?";
-                PreparedStatement ps = con.prepareStatement(sql);
-                ps.setString(1, choice);
-                rs = ps.executeQuery();
-
-            }
-            while(rs.next()) {
-    
-                OrderInfo orders = new OrderInfo();
-
-                orders.setOrderID(rs.getInt("order_id"));
-
-                orders.setCustomerName(rs.getString("cust_name"));
-                
-                orders.setOrderDate(rs.getDate("order_date"));
-
-                orders.setDescription(rs.getString("order_desc")); 
-                // System.out.println("----SET DEL----");
- 
-                // orders.setDel(" ");  
-                // System.out.println("Del = " + orders.getDel());
-          
-
-                newOrders.add(orders);
-
-                System.out.println("newOrders contains: " + orders.getOrderID() + 
-                                    " " + orders.getCustomerName() +
-                                    " " + orders.getOrderDate() +
-                                    " " + orders.getDescription());
-
-            }
-
-            
-
-            /**
-             * Sorts all order array lists by date ascending
-             */
-            Collections.sort(newOrders, new Comparator<OrderInfo>() {
-                @Override
-                public int compare(OrderInfo o1, OrderInfo o2) {
-                    return o1.getOrderDate().compareTo(o2.getOrderDate());
-                }
-            });
-            lf.setNewOrders(newOrders);
-            System.out.println("-----OrderInfoForm.setNewOrders()-----");
-            System.out.println(lf.getNewOrders());
-
-
-
-
-            session.setAttribute("cooldata", newOrders);
-            session.setAttribute("customerList", customerList);
-            System.out.println("-----COOLDATA-----");
-            System.out.println(newOrders);
-            System.out.println("-----customerList-----");
-            System.out.println(customerList);
-
-
-
-
-
-
             String query = "select * from users where userid = ? and passwd_digest = ?";
 
             PreparedStatement preparedStatement = con.prepareStatement(query);
@@ -256,10 +112,7 @@ public class LoginAction extends Action{
             ex.printStackTrace();
         } finally {
             try {
-                rs.close();
                 loginSet.close();
-                resultset.close();
-                stmt.close();
                 con.close();
                 ctx.close();
 
