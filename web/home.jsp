@@ -42,15 +42,23 @@
   
         <h2>Brought to you by: <c:out value="${DBProductInfo}" /></h2>
 
-        <html:form action="Login.do">
+        <html:form action="Home.do">
 
-          <select name="dropDown">
+          <html:select name="HomeForm" property="${customerList}">
+
+              <html:option value="all">All Orders</html:option>
+              <html:optionsCollection name="dropDown" property="${customerList}"
+              label="customerName" value="customerID" />
+
+          </html:select>
+
+          <!-- <select name="dropDown">
 
             <option value="all">All Orders</option>
             <c:forEach items="${customerList}" var="items">
               <option value="${items.customerID}">${items.customerName}</option>
             </c:forEach>
-          </select>
+          </select> -->
 
           <html:submit value="Submit" />
 
@@ -87,17 +95,17 @@
 
                         <!--EDIT ITEMS-->
                         <td>
-                          <html:link action="Orders.do?parameter=orderEdit&orderID=${item.orderID}">
+                          <a href="Orders.do?parameter=orderEdit&orderID=${item.orderID}">
                                 Edit
-                          </html:link>
+                          </a>
                         </td>
 
                         <!--DELETE ITEMS-->
                         <td>
-                          <html:link action="Orders.do?parameter=orderEdit&orderID=${item.orderID}&delOrderID=foo">
+                          <a href="Orders.do?parameter=orderEdit&orderID=${item.orderID}&delOrderID=foo">
 
                           Delete
-                        </html:link>
+                          </a>
                         </td>
 
                       
@@ -108,9 +116,9 @@
         </table> 
         <br>
         <br>          
-        <html:link action="Orders.do?parameter=orderEdit&addNew=1">
+        <a href="Orders.do?parameter=orderEdit&addNew=1">
           <button>Submit New Order</button>
-        </html:link>
+        </a>
         <br>
 
         <h2><c:out value="${message}" /></h2>

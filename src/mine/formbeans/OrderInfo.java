@@ -16,69 +16,14 @@ import static java.lang.System.*;
 import java.io.*;
 import java.util.*;
 import java.nio.charset.StandardCharsets;
+import lombok.Getter;
+import lombok.Setter;
+
 
 public class OrderInfo implements Serializable{
-    private int orderID;
-    private int customerID;
-    private String customerName = null;
-    private Date orderDate = null;
-    private String description = null;
-    // private String del = null;
-
-    public OrderInfo(){
-    }
-
-    public int getOrderID() {
-        return orderID;
-    }
-
-    public int getCustomerID() {
-        return customerID;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    // public String getDel(){
-    //     return del;
-    // }
-
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
-    }
-
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    // public void setDel(String del){
-    //     this.del = del;
-    // }
-
-    // @Override
-    // public int compare(OrderInfo o1, OrderInfo o2) {
-    //     return o1.getOrderDate().compareTo(o2.getOrderDate());
-    // }
-
+    private @Getter @Setter int orderID;
+    private @Getter @Setter int customerID;
+    private @Getter @Setter String customerName;
+    private @Getter @Setter Date orderDate;
+    private @Getter @Setter String description;
 }

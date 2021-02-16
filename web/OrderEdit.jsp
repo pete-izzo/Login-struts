@@ -128,7 +128,7 @@
             <html:submit value="Yes"/>
 
           </html:form>
-          <html:link href="Login.do">Back Home</html:link>
+          <a href="Login.do">Back Home</a>
 
 
 
@@ -161,7 +161,7 @@
               
   
               <html:submit value="Submit New Order" />
-              <html:link href="Login.do">Back Home</html:link>
+              <a href="Login.do">Back Home</a>
 
           </html:form>
   
