@@ -16,5 +16,7 @@ public class OrderEditForm extends ActionForm {
     private @Getter @Setter String orderDate;
     private @Getter @Setter String description;
     private @Getter @Setter ArrayList<OrderInfo> newOrders;
+    private @Getter @Setter ArrayList<CustomerInfo> CustomerList;    
+
 
 }

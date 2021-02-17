@@ -53,14 +53,6 @@
 
           </html:select>
 
-          <!-- <select name="dropDown">
-
-            <option value="all">All Orders</option>
-            <c:forEach items="${customerList}" var="items">
-              <option value="${items.customerID}">${items.customerName}</option>
-            </c:forEach>
-          </select> -->
-
           <html:submit value="Submit" />
 
         </html:form>

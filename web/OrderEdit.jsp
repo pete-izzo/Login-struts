@@ -143,11 +143,20 @@
           <h2>Add an order for...</h2>
 
           <html:form action="Orders.do?parameter=add">
-              <select name="customerChoice">
+              <!-- <select name="customerChoice">
                   <c:forEach items="${customerList}" var="items">
                       <option value="${items.customerID}">${items.customerName} ${items.customerID}</option>
                   </c:forEach>
-              </select>
+              </select> -->
+
+              <html:select name="OrderEditForm" property="customerID">
+
+                <html:optionsCollection name="OrderEditForm" property="customerList"
+                label="customerName" value="customerID" />
+  
+  
+              </html:select>
+  
   
               <br>
               <br>

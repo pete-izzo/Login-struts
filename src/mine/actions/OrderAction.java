@@ -67,8 +67,14 @@ public class OrderAction extends DispatchAction {
         OrderEditForm oef = (OrderEditForm) form;
         HttpSession session = request.getSession(false);
 
-        String customer = request.getParameter("customerChoice");
-        session.setAttribute("customerChoice", customer);
+        // String customer = request.getParameter("customerChoice");
+        // session.setAttribute("customerChoice", customer);
+
+        String customer =  String.valueOf(oef.getCustomerID());
+
+        System.out.println("----NEW CUSTOMER CHOICE----");
+        System.out.println(customer);
+
 
         //formats date from string so it can be put in db
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
@@ -91,6 +97,12 @@ public class OrderAction extends DispatchAction {
             con = ds.getConnection();
 
             stmt = con.createStatement();
+
+            /**
+             *  THIS IS WHERE YOU LEFT OFF
+             *  CHANGE ALL CUST ID VARIABLES TO THAT OF THE
+             *  SELECTED CUST ID FROM THE DROP DOWN
+             */
 
             System.out.println("-----Inside New Order Function-------");
 
@@ -290,6 +302,75 @@ public class OrderAction extends DispatchAction {
             throws Exception {
         OrderEditForm oef = (OrderEditForm) form;
         HttpSession session = request.getSession(false);
+
+        
+        ArrayList<CustomerInfo> customerList = oef.getCustomerList();
+        if(oef.getCustomerList() == null) {
+            customerList = new ArrayList<>();
+        }
+
+        String dbURL ="java:comp/env/jdbc/NewDBTest";
+
+        String driver = "org.apache.derby.jdbc.EmbeddedDriver";
+
+        Context ctx = null;
+        Connection con = null;
+        Statement statement =null;
+        ResultSet resultset = null;
+        String customerQuery;
+
+        try {
+            ctx = new InitialContext();
+            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/firstDB");
+
+            con = ds.getConnection();
+            customerList.clear();
+            System.out.println("-----NEW ORDERS AND CUSTOMER LIST CLEARED-----");
+
+
+            statement=con.createStatement();
+
+            customerQuery = "SELECT * FROM customers";
+
+            resultset = statement.executeQuery(customerQuery);
+
+            while(resultset.next()) {
+
+                /**
+                 * create customer list for drop down
+                 */
+
+                CustomerInfo customers = new CustomerInfo();
+
+                customers.setCustomerName(resultset.getString("cust_name"));
+                customers.setCustomerID(resultset.getInt("cust_id"));
+
+                customerList.add(customers);
+
+            }
+            oef.setCustomerList(customerList);
+        } catch (NamingException ex) {
+    
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                resultset.close();
+                statement.close();
+                con.close();
+                ctx.close();
+
+
+
+    
+            }catch (SQLException error) {
+                error.printStackTrace();
+            }catch (NamingException error) {
+                error.printStackTrace();
+            }
+        }
+
 
 
         String orderIDString = request.getParameter("orderID");
