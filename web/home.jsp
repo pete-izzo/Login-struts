@@ -44,11 +44,12 @@
 
         <html:form action="Home.do">
 
-          <html:select name="HomeForm" property="${customerList}">
+          <html:select name="HomeForm" property="customerID">
 
               <html:option value="all">All Orders</html:option>
-              <html:optionsCollection name="dropDown" property="${customerList}"
+              <html:optionsCollection name="HomeForm" property="customerList"
               label="customerName" value="customerID" />
+
 
           </html:select>
 

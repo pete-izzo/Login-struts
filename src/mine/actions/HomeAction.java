@@ -52,7 +52,12 @@ public class HomeAction extends Action{
         HttpSession session = request.getSession(false);
 
         // Dropdown choice
-        String choice =  request.getParameter("dropDown");
+        String choice =  request.getParameter("action");
+
+        String newChoice =  String.valueOf(hf.getCustomerID());
+
+        System.out.println("----NEW CHOICE----");
+        System.out.println(newChoice);
 
 
 
@@ -88,8 +93,6 @@ public class HomeAction extends Action{
         String sql;
         String customerQuery;
 
-        System.out.println("-----START HOME-----");
-
         try {
             ctx = new InitialContext();
             DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/firstDB");
@@ -107,8 +110,6 @@ public class HomeAction extends Action{
             customerQuery = "SELECT * FROM customers";
 
             resultset = statement.executeQuery(customerQuery);
-            System.out.println(resultset);
-
 
             while(resultset.next()) {
 
@@ -125,11 +126,8 @@ public class HomeAction extends Action{
 
             }
             hf.setCustomerList(customerList);
-            System.out.println(hf.getCustomerList());
 
-
-
-            if (choice == null || choice.equals("all")) {
+            if (newChoice == null || newChoice.equals("0")) {
 
                 /**
                  * The Query
@@ -150,7 +148,7 @@ public class HomeAction extends Action{
                 " WHERE o.cust_id = c.cust_id" +
                 " AND c.cust_id = ?";
                 PreparedStatement ps = con.prepareStatement(sql);
-                ps.setString(1, choice);
+                ps.setString(1, newChoice);
                 rs = ps.executeQuery();
 
             }
@@ -192,18 +190,9 @@ public class HomeAction extends Action{
                 }
             });
             hf.setNewOrders(newOrders);
-            System.out.println("-----OrderInfoForm.setNewOrders()-----");
-            System.out.println(hf.getNewOrders());
-
-
-
 
             session.setAttribute("cooldata", newOrders);
             session.setAttribute("customerList", customerList);
-            System.out.println("-----COOLDATA-----");
-            System.out.println(newOrders);
-            System.out.println("-----customerList-----");
-            System.out.println(customerList);
 
             String productInfo = con.getMetaData().getDatabaseProductName();
 
