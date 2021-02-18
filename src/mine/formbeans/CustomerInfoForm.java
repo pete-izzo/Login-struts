@@ -2,19 +2,13 @@ package mine.formbeans;
 
 import org.apache.struts.action.ActionForm;
 import java.util.*;
+import lombok.Getter;
+import lombok.Setter;
+
 
 public class CustomerInfoForm extends ActionForm
 {
 
-	private ArrayList<CustomerInfo> CustomerList;
-	public ArrayList<CustomerInfo> getCustomerList()
-	{
-		return CustomerList;
-	}
-
-	public void setCustomerList(ArrayList<CustomerInfo> CustomerList)
-	{
-		this.CustomerList = CustomerList;
-	}
+	private @Getter @Setter ArrayList<CustomerInfo> CustomerList;
 }
 

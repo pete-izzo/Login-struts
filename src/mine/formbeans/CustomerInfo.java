@@ -11,27 +11,15 @@ import static java.lang.System.*;
 import java.io.*;
 import java.util.*;
 import java.nio.charset.StandardCharsets;
+import lombok.Getter;
+import lombok.Setter;
+
 
 public class CustomerInfo{
-    private int customerID;
-    private String customerName = null;
+    private @Getter @Setter int customerID;
+    private @Getter @Setter String customerName = null;
 
     public CustomerInfo(){
-    }
-    public int getCustomerID() {
-        return customerID;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
     }
 
 }
