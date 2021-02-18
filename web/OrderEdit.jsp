@@ -64,10 +64,10 @@
             <tbody>
 
               <tr>
-                <th><c:out value="${orders.getOrderID()}"/></th>
-                <th><c:out value="${orders.getCustomerName()}"/></th>
-                <th><c:out value="${orders.getOrderDate()}"/></th>
-                <th><c:out value="${orders.getDescription()}"/></th>
+                <th><c:out value="${orders.orderID}"/></th>
+                <th><c:out value="${orders.customerName}"/></th>
+                <th><c:out value="${orders.orderDate}"/></th>
+                <th><c:out value="${orders.description}"/></th>
               </tr>
                   <tr>
                       <html:form action="Orders.do?parameter=update">
@@ -113,10 +113,10 @@
 
 
               <tr>
-                <th><c:out value="${orders.getOrderID()}"/></th>
-                <th><c:out value="${orders.getCustomerName()}"/></th>
-                <th><c:out value="${orders.getOrderDate()}"/></th>
-                <th><c:out value="${orders.getDescription()}"/></th>
+                <th><c:out value="${orders.orderID}"/></th>
+                <th><c:out value="${orders.customerName}"/></th>
+                <th><c:out value="${orders.orderDate}"/></th>
+                <th><c:out value="${orders.description}"/></th>
               </tr>
             </tbody>
           </table>  
@@ -143,11 +143,6 @@
           <h2>Add an order for...</h2>
 
           <html:form action="Orders.do?parameter=add">
-              <!-- <select name="customerChoice">
-                  <c:forEach items="${customerList}" var="items">
-                      <option value="${items.customerID}">${items.customerName} ${items.customerID}</option>
-                  </c:forEach>
-              </select> -->
 
               <html:select name="OrderEditForm" property="customerID">
 
@@ -162,7 +157,6 @@
               <br>
                 <label for="date">Order Date: </label><br>
                 <nested:text styleId="datepicker" property="orderDate" />
-                <!-- <input type="date" required name="order_date" id="order_date"> -->
                 <br>
                 <label for="description">Order Description:</label><br>
                 <nested:text property="description" />

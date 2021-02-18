@@ -72,7 +72,7 @@ public class OrderAction extends DispatchAction {
 
         String customer =  String.valueOf(oef.getCustomerID());
 
-        System.out.println("----NEW CUSTOMER CHOICE----");
+        System.out.println("----<<<<<<<<<<NEW CUSTOMER CHOICE>>>>>>>>>>>----");
         System.out.println(customer);
 
 
@@ -80,9 +80,6 @@ public class OrderAction extends DispatchAction {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         java.util.Date date = sdf.parse(oef.getOrderDate());
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-
-        System.out.println("customer: " + customer);
-        System.out.println("SQL Date: " + sqlDate);
 
         Context ctx = null;
         Connection con = null;
